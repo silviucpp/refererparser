@@ -19,12 +19,12 @@ from_string(<<"internal">>) ->
     ?MEDIUM_INTERNAL.
 
 to_string(?MEDIUM_UNKNOWN) ->
-    <<"UNKNOWN">>;
+    <<"unknown">>;
 to_string(?MEDIUM_SEARCH) ->
-    <<"SEARCH">>;
+    <<"search">>;
 to_string(?MEDIUM_SOCIAL) ->
-    <<"SOCIAL">>;
+    <<"social">>;
 to_string(?MEDIUM_EMAIL) ->
-    <<"EMAIL">>;
+    <<"email">>;
 to_string(?MEDIUM_INTERNAL) ->
-    <<"INTERNAL">>.
+    <<"internal">>.
