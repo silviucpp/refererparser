@@ -137,19 +137,25 @@ find_term([], _Params) ->
 -spec match_hosts(binary(), binary()) ->
     boolean().
 
+match_hosts(_A0, <<>>) ->
+    false;
 match_hosts(A0, B0) ->
+
     A = normalise_hosts(A0),
     B = normalise_hosts(B0),
 
-    ALength = byte_size(A),
-    BLength = byte_size(B),
-    DiffLength = erlang:max(0, ALength - BLength),
-
-    case A of
-        <<_:DiffLength/binary, B/binary>> ->
-            true;
-        _ ->
-            false
+    case erlang:max(0, byte_size(A) - byte_size(B)) of
+        0 ->
+            A == B;
+        DiffLength0 ->
+            % we strip all subdomains
+            DiffLength = DiffLength0 -1,
+            case A of
+                <<_:DiffLength/binary, ".", B/binary>> ->
+                    true;
+                _ ->
+                    false
+            end
     end.
 
 -spec normalise_hosts(binary()) ->

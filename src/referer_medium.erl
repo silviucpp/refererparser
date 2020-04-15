@@ -16,7 +16,9 @@ from_string(<<"social">>) ->
 from_string(<<"email">>) ->
     ?MEDIUM_EMAIL;
 from_string(<<"internal">>) ->
-    ?MEDIUM_INTERNAL.
+    ?MEDIUM_INTERNAL;
+from_string(<<"paid">>) ->
+    ?MEDIUM_PAID_MEDIA.
 
 to_string(?MEDIUM_UNKNOWN) ->
     <<"unknown">>;
@@ -27,4 +29,6 @@ to_string(?MEDIUM_SOCIAL) ->
 to_string(?MEDIUM_EMAIL) ->
     <<"email">>;
 to_string(?MEDIUM_INTERNAL) ->
-    <<"internal">>.
+    <<"internal">>;
+to_string(?MEDIUM_PAID_MEDIA) ->
+    <<"paid">>.

@@ -1,6 +1,6 @@
 {application, refererparser, [
     {description, "Erlang library for extracting marketing attribution data from referrer URLs"},
-    {vsn, "1.0"},
+    {vsn, "1.1.0"},
     {registered, []},
     {applications, [kernel, stdlib, jsone, liburi]},
     {mod, {refererparser_app, []}},

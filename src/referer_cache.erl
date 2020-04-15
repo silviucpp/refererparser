@@ -43,7 +43,6 @@ parse_mediums([{MediumBin, Sources}|T], Acc) ->
         Domains = referer_utils:lookup(<<"domains">>, Args),
         Parameters = referer_utils:lookup(<<"parameters">>, Args),
 
-        ok = validate_params(Medium, SourceName, Parameters),
         ok = validate_domains(Domains, SourceName),
 
         lists:foldl(fun(Domain, DAcc) -> [{Domain, {Medium, SourceName, Parameters}} | DAcc] end, SrcAcc, Domains)
@@ -52,21 +51,6 @@ parse_mediums([{MediumBin, Sources}|T], Acc) ->
     parse_mediums(T, lists:foldl(FunSources, Acc, Sources));
 parse_mediums([], Acc) ->
     Acc.
-
-validate_params(?MEDIUM_SEARCH, Source, Params) ->
-    case Params of
-        undefined ->
-            throw({error, <<"No parameters found for search referer: '", Source/binary,"'">>});
-        _ ->
-            ok
-    end;
-validate_params(_Medium, Source, Params) ->
-    case Params of
-        undefined ->
-            ok;
-        _ ->
-            throw({error, <<"Parameters not supported for non-search referer: '", Source/binary, "'">>})
-    end.
 
 validate_domains(undefined, Source) ->
     throw({error, <<"No domains found for referer: '", Source/binary, "'">>});
